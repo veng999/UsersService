@@ -1,4 +1,4 @@
-<h2>UsersService</h2> </br>
+<h2>UsersService</h2>
 <p>Spring Boot service for user maintence with the ability to automatically switch to the away status</p>
 <p style="text-align: justify;"><strong>Требования предъвляемые к созданию приложения:</strong></p>
 <p style="text-align: justify;"><span>* Средства разработки: Java 1.7+;</span><br /><span>* Инструменты: Spring Framework;</span><br /><span>* Протокол: HTTP;</span><br /><span>* База данных: PostgreSQL.</span><br /><br /><br /><strong>Функционал:</strong></p>
@@ -7,9 +7,9 @@
 <p style="text-align: justify;"><strong>Для взаимодействия с сервером Tomcat клиент должен обращаться к нему с помощью следующих запросов:</strong></p>
 <p style="text-align: justify;">1.&nbsp;<a href="http://localhost:8080/user/save">http://localhost:8080/user/save</a>&nbsp;- GET запрос для добавления нового пользователя;<br />2.&nbsp;<a href="http://localhost:8080/user/find/{id}">http://localhost:8080/user/find/{id}</a>&nbsp;- GET запрос для получения информации о пользователе в соответствии с переданным уникальным id;</p>
 <p style="text-align: justify;">3.&nbsp;<a href="http://localhost:8080/user/change/{id}">http://localhost:8080/user/change/{id}</a>&nbsp;- PUT запрос для изменения статуса пользователя&nbsp;в соответствии с переданным уникальным id;</p>
-<p style="text-align: justify;">4. Автоматический перевод пользователя в статус away реализован с помощью <strong>триггера - tr_aiu_users_set_last_online</strong> (и соответствующей ему <strong>функциим - trf_set_value_last_online</strong>), а также благодаря <strong>процедуре - proc_refresh_user_statuses</strong>, которая вызывается из java кода каждую минуту в методе&nbsp;<span>checkLastOnline();</span></p>
-<p style="text-align: justify;"><span>5. Обработка ошибок: В случае если пользователь не будет найден по id метод&nbsp;</span><span>findById() и&nbsp;</span><span>changeStatus() бросают исключение&nbsp;</span>UserNotFoundException.</p>
 <p style="text-align: justify;"><strong>Примечание:</strong></p>
+<p style="text-align: justify;">Автоматический перевод пользователя в статус away реализован с помощью <strong>триггера - tr_aiu_users_set_last_online</strong> (и соответствующей ему <strong>функциим - trf_set_value_last_online</strong>), а также благодаря <strong>процедуре - proc_refresh_user_statuses</strong>, которая вызывается из java кода каждую минуту в методе&nbsp;<span>checkLastOnline();</span></p>
+<p style="text-align: justify;"><span>Обработка ошибок: В случае если пользователь не будет найден по id метод&nbsp;</span><span>findById() и&nbsp;</span><span>changeStatus() бросают исключение&nbsp;</span>UserNotFoundException.</p>
 <p style="text-align: justify;">Триггер&nbsp;tr_aiu_users_set_last_online включается п<span>ри добавлении или изменении записи, если значение поля </span><span>user_status мы ставим равным 'online', то поле last_online ставится в </span><span>текущее время;</span></p>
 <p style="text-align: justify;">Процедура proc_refresh_user_statuses просматривает все записи, и для тех записей, у которых user_status = online, смотрит значение поля <br />last_online. Если поле last_online старше 5 минут назад, то для этих <br />записей значение поля user_status заменяется на away.</p>
 <p style="text-align: justify;"><strong>Бэкап базы данных</strong> (usersdb.backup). В базе данных уже внесено три пользователя.</p>
